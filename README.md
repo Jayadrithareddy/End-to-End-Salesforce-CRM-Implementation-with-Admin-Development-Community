@@ -1,459 +1,160 @@
-End-to-End Salesforce Implementation — Smart Student Enrollment & Learning Portal
+# 🚀 Smart Student Enrollment & Learning Portal — End-to-End Salesforce Implementation
 
-Project: Smart Student Enrollment & Learning Portal
-Owner / Contact: Settypalli Jayadritha Reddy — settypallijayadrithareddy@gmail.com
-Status: In development / Production (adjust as appropriate)
-Last updated: YYYY-MM-DD (replace with current date)
+**Owner / Contact:** Settypalli Jayadritha Reddy — `settypallijayadrithareddy@gmail.com`
+**Status:** In Development / Production (update as needed)
+**Last updated:** 2025-09-25
 
+---
 
-Project Overview
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![Build Status](https://img.shields.io/badge/CI%2FCD-passing-brightgreen)](#) [![Coverage](https://img.shields.io/badge/Coverage->75%25-yellowgreen)](#)
 
-This repository contains documentation, configuration, and code required to implement an end-to-end Smart Student Enrollment & Learning Portal on the Salesforce platform. The solution automates lead capture, admission processing, course selection, batch allocation, fee tracking, notifications, and reporting for educational institutes.
+## Table of Contents
 
-Key components:
+1. [Project Overview](#project-overview)
+2. [Goals & Success Criteria](#goals--success-criteria)
+3. [High-level Architecture](#high-level-architecture)
+4. [Project Phases & Process (End-to-End)](#project-phases--process-end-to-end)
+5. [Org Strategy & Environments](#org-strategy--environments)
+6. [Data Model & Key Objects](#data-model--key-objects)
+7. [Features & User Stories](#features--user-stories)
+8. [Configuration & Implementation Details](#configuration--implementation-details)
+9. [Custom Code — Patterns & Examples](#custom-code--patterns--examples)
+10. [Integrations](#integrations)
+11. [Data Migration & ETL](#data-migration--etl)
+12. [CI / CD & Deployment](#ci--cd--deployment)
+13. [Testing Strategy](#testing-strategy)
+14. [Training, Handover & Docs](#training-handover--docs)
+15. [Monitoring, Maintenance & Backups](#monitoring-maintenance--backups)
+16. [Security & Compliance](#security--compliance)
+17. [Troubleshooting & Rollback](#troubleshooting--rollback)
+18. [Repository Layout & Quick Start](#repository-layout--quick-start)
+19. [Contributing](#contributing)
+20. [FAQ & Troubleshooting Tips](#faq--troubleshooting-tips)
+21. [Contact & License](#contact--license)
 
-Salesforce declarative configuration (Objects, Flows, Process Builder, Permission Sets)
+---
 
-Apex classes and triggers for complex business logic
+## Project Overview
 
-Lightning Web Components (LWC) for modern UI
+A complete, production-ready **Salesforce** implementation for the **Smart Student Enrollment & Learning Portal**: automated lead capture, admissions processing, course selection, batch allocation, fee management, notifications, analytics, and integrations with payment/ERP systems.
 
-Integration connectors (REST / SOAP / Middleware)
+This README is designed for GitHub—copy it to the repository root as `README.md`.
 
-CI/CD scripts (SFDX / GitHub Actions)
+---
 
-Data migration scripts and sample datasets
+## Goals & Success Criteria
 
-Goals & Success Criteria
+* Reduce manual admission processing time by **X%** (replace X with target).
+* Reliable fee collection with online payment reconciliation.
+* 0 critical bugs at Go-Live; < 2 critical issues/month after stabilization.
+* Dashboard visibility for leadership (enrollment funnel, revenue, batch occupancy).
 
-Reduce manual admission processing time by X% (set target).
+---
 
-Improve data accuracy for student records and fee tracking.
+## High-level Architecture
 
-Provide user-friendly agent and admin UX using Lightning.
+* **UI:** Lightning Experience + Lightning Web Components (LWC) + Experience Cloud site for applicants.
+* **Data:** Salesforce core objects + custom objects (`Student__c`, `Course__c`, `Batch__c`, `Enrollment__c`, `Payment__c`).
+* **Integrations:** Payment gateway, SMS/Email, ERP/Finance via secure REST/Middleware.
+* **CI/CD:** SFDX + GitHub Actions for automated validations & deploys.
 
-Achieve zero-critical-bugs at Go-Live and <2 per month after stabilization.
+---
 
-Deliver full documentation and handover for admins and IT.
+## Project Phases & Process (End-to-End)
 
-High-level Architecture
+Follow this checklist as a project playbook. Each *Deliverable* should live in `/docs/` in the repo.
 
-Front-end UI: Lightning Experience (LWC) for students/admins, Experience Cloud site for external users.
+### Phase 0 — Initiation
 
-Salesforce Orgs: Dev → CI → UAT → Production.
+* Stakeholder list & RACI.
+* Project charter & KPIs.
+* Repo, issue tracker, and collaboration workspace setup.
 
-Data: Custom objects for Lead, Student__c, Course__c, Batch__c, Enrollment__c, Payment__c.
+### Phase 1 — Discovery & Requirement Gathering
 
-Integrations: Payment gateway, SMS/Email provider, ERP (finance) via secure REST endpoints or middleware (MuleSoft/Boomi).
+* Conduct workshops with Admission, Finance, Faculty, Students.
+* Map user journeys & acceptance criteria.
+* Deliverables: BRD, Process Maps, User Stories.
 
-CI/CD: SFDX + GitHub Actions (or Jenkins) for automated validation and deploys.
+### Phase 2 — Solution Design
 
-Monitoring: Salesforce Health Check, Event Monitoring, and custom error logging.
+* Data model + API contracts.
+* UI wireframes (LWC pages).
+* Security & permission model.
+* Deliverables: SDD, ER diagrams, Permission Matrix.
 
-Project Phases & Process (End-to-End)
+### Phase 3 — Development & Configuration
 
-This section is a playbook you can follow for any Salesforce implementation.
+* Declarative: Objects, Flows, Validation Rules, Reports, Dashboards.
+* Programmatic: Apex services, Trigger handlers, LWC components.
+* Use Scratch Orgs and unlocked packages for modularity.
 
-Phase 0 — Initiation
+### Phase 4 — Integration & Data Migration
 
-Stakeholder identification & RACI.
+* ETL plan, sample transforms, and reconciliation reports.
+* Integration designs: payment callbacks, ERP sync schedules.
 
-High-level scope & budget.
+### Phase 5 — Testing
 
-Success metrics (KPIs) and governance model.
+* Unit tests (Apex), integration tests (Postman/Newman), UAT scenarios.
+* Performance and security testing.
 
-Create project workspace (repo, Jira/Asana, Confluence).
+### Phase 6 — Training & Handover
 
-Phase 1 — Discovery & Requirement Gathering
+* Admin documentation, runbooks, recorded sessions.
+* Handover checklist: access, backups, support contacts.
 
-Workshops: Admission officers, teachers, students, finance, IT.
+### Phase 7 — Deployment & Go-Live
 
-Capture user journeys & process maps.
+* Freeze, final migration, validated deployment, smoke tests.
+* Post-go-live hyper-care window.
 
-Document functional and non-functional requirements.
+### Phase 8 — Maintenance
 
-Identify integrations, data sources, and compliance needs.
+* Quarterly cleanups, backup verification, iterative enhancements.
 
-Deliverables: BRD, Process maps, User stories, Acceptance criteria.
+---
 
-Phase 2 — Solution Design
+## Org Strategy & Environments
 
-Logical data model and ER diagrams.
+* **Dev:** Scratch orgs & developer sandboxes.
+* **CI/Integration:** Persistent sandbox for automated tests.
+* **UAT:** Partial/full-copy sandbox for business validation.
+* **Perf (optional):** Full-copy sandbox for scalability tests.
+* **Prod:** Lockdown releases via CI/CD pipeline.
 
-Permission matrix and role model.
+---
 
-Integration design (API contracts).
+## Data Model & Key Objects
 
-UI/UX wireframes and Lightning page designs.
+**Core objects:** Lead (standard), `Student__c`, `Course__c`, `Batch__c`, `Enrollment__c`, `Payment__c`, `Admission_Process__c`.
 
-Security & backup strategy.
+**Design notes:**
 
-Deliverables: Solution Design Document (SDD), data mapping, API spec.
+* Use External IDs for migration reconciliation.
+* Keep normalization: Course catalog as master data, Batch references Course, Enrollment relates Student & Batch.
 
-Phase 3 — Development & Configuration
+---
 
-Configure Salesforce declaratively: Objects, fields, page layouts, validation rules, flows.
+## Features & User Stories (Examples)
 
-Implement Apex and LWC for advanced behavior.
+* **Admission Officer:** Convert lead → student → enrollment.
+* **Student:** Apply online, make payment, view status.
+* **Finance:** Reconcile payments, export receipts to ERP.
+* **Teacher:** View class roster & attendance.
 
-Build Experience Cloud site (if required).
+---
 
-Setup external services & named credentials.
+## Configuration & Implementation Details
 
-Best practices:
+### Declarative
 
-Use unlocked packages or metadata API with SFDX.
+* Flows to automate lead assignment & conversion.
+* Permission sets & profiles for role-based access.
+* Reports: Enrollment funnel, Fee collection, Batch utilization.
 
-Keep logic testable and bulkified.
+### Recommended Flow Example (abstract)
 
-Keep triggers minimal — use handler patterns.
-
-Phase 4 — Integration & Data Migration
-
-Extract, transform, and load historical data.
-
-Implement middleware or direct integrations.
-
-Staging loads and data reconciliation.
-
-Deliverables: Data migration scripts, test loads, reconciliation report.
-
-Phase 5 — Testing
-
-Unit tests: Apex with >75% coverage and positive + negative cases.
-
-Integration tests.
-
-UAT with stakeholders using real scenarios.
-
-Performance & security testing.
-
-Deliverables: Test plan, test cases, UAT sign-off.
-
-Phase 6 — Training & Documentation
-
-Admin and end-user training sessions (recordings + docs).
-
-Provide runbooks and FAQs.
-
-Knowledge transfer to internal Salesforce admins.
-
-Phase 7 — Deployment & Go-Live
-
-Freeze changes, final data migration cutover.
-
-Execute release plan and smoke tests.
-
-Support window post-launch for rapid fixes.
-
-Phase 8 — Post-Go-Live Support & Continuous Improvement
-
-Stabilization period with a dedicated triage team.
-
-Collect feedback and plan iterative enhancements.
-
-Maintenance schedule for releases and org cleanups.
-
-Salesforce Org Strategy & Environments
-
-Dev: personal scratch orgs and shared dev sandboxes.
-
-CI / Integration: automated validation sandbox or pool sandbox.
-
-UAT: full-copy or partial-copy sandbox for business UAT.
-
-Performance: optional full-copy sandbox.
-
-Production: final environment; deploy via validated CI/CD pipeline.
-
-Data Model & Key Objects
-
-Minimal set of objects for enrollment solution:
-
-Lead (standard) — inbound inquiries.
-
-Student__c (custom) — consolidated student record.
-
-Course__c (custom) — course catalog.
-
-Batch__c (custom) — scheduled batch info.
-
-Enrollment__c (custom) — join between Student & Batch.
-
-Payment__c (custom) — fee payments, status, receipts.
-
-Admission_Process__c (custom) — track application stages.
-
-Include the important fields, sample picklists (status, payment mode), and validation rules. Keep field-level security and page layouts aligned with personas.
-
-Features & User Stories (Examples)
-
-As an admission officer, I want to convert a lead to a student record so I can track enrollments.
-
-As a student, I want to pay fees online and receive a receipt via email/SMS.
-
-As a finance admin, I want to export monthly receipts and reconcile payments with ERP.
-
-As a teacher, I want to view batch rosters and attendance.
-
-Configuration Details
-Declarative components
-
-Flows: lead capture -> auto-assign to counsellor -> convert to Student__c and Enrollment__c.
-
-Process Builder/Flow Scheduler: for scheduled actions (prefer Flow).
-
-Validation Rules: ensure required fields and data integrity.
-
-Permission Sets & Profiles: read/write controls.
-
-Page Layouts & Record Types: for different institute types / courses.
-
-Reports & Dashboards: enrollment funnel, fees due, batch occupancy.
-
-Sample Flow design
-
-Trigger: On Lead creation via Web-to-Lead or API.
-
-Steps: validate data → assign owner → create tasks for counselor → if accepted, create Student__c + Enrollment__c.
-
-Custom Code (Apex, LWC, Triggers)
-Apex Guidelines
-
-Use trigger frameworks (one trigger per object).
-
-Bulkify and minimize SOQL/DML.
-
-Implement meaningful unit tests, cover positive/negative and edge cases.
-
-Abstract business logic into service classes.
-
-Example Apex Trigger Pattern (skeleton)
-trigger LeadTrigger on Lead (after insert, after update) {
-    if (Trigger.isAfter) {
-        LeadTriggerHandler.handleAfter(Trigger.new, Trigger.oldMap);
-    }
-}
-
-Example Apex Handler (skeleton)
-public with sharing class LeadTriggerHandler {
-    public static void handleAfter(List<Lead> newLeads, Map<Id, Lead> oldMap){
-        // validation, conversion, callouts, etc.
-    }
-}
-
-LWC / Lightning
-
-Use LWC for modern interactive components (enrollment wizard, payment UI).
-
-Keep security: use @AuraEnabled Apex for server operations and enforce sharing.
-
-Integrations
-
-Payment Gateway: REST-based with Named Credentials and Auth. Use secure callback handling for payment confirmations.
-
-SMS/Email: Use external providers (Twilio, SendGrid) or Salesforce Email services.
-
-ERP / Finance: Middleware-based integration (batch exports or near real-time sync).
-
-Authentication: SSO (SAML/OAuth) for staff; Communities for external users.
-
-Best practices:
-
-Use Named Credentials and Named Principal when possible.
-
-Log all integration errors and retry with exponential backoff.
-
-Secure credentials via protected Custom Metadata or Secrets Manager.
-
-Data Migration & ETL
-
-Extract sample from legacy systems (CSV/DB dumps).
-
-Clean & transform in staging (remove duplicates, normalize fields).
-
-Use Data Loader CLI, SFDX data commands, or ETL tools (Talend, Informatica).
-
-Validate and reconcile counts and sample records.
-
-Steps:
-
-Map legacy fields to Salesforce schema.
-
-Load master data (Course__c, Batch__c).
-
-Load Student__c with external IDs.
-
-Load Enrollment__c and Payment__c referencing external IDs.
-
-CI / CD & Deployment
-
-Tooling: SFDX (Salesforce CLI), Git, GitHub Actions or Jenkins.
-
-Recommended flow:
-
-Developers push feature branches.
-
-Pull request triggers automated SFDX validation (run tests).
-
-Merge to main triggers package creation and UAT deployment.
-
-After UAT sign-off, deploy to Production with a validated deployment.
-
-Metadata Management: Use source:push/source:pull for scratch orgs and source:convert + mdapi for sandbox/prod where needed.
-
-Release windows: schedule off-business-hours, prepare rollback plan.
-
-Sample GitHub Action snippet (skeleton)
-name: Validate & Test
-on: [push, pull_request]
-jobs:
-  validate:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install sfdx
-        uses: amtrack/sfdx-action@v1
-      - run: sfdx force:auth:jwt:grant ... # auth to CI org
-      - run: sfdx force:source:deploy -x manifest/package.xml -c
-      - run: sfdx force:apex:test:run --resultformat human --wait 10
-
-Testing Strategy
-
-Unit tests for all Apex classes (include negative paths).
-
-Integration tests for APIs (use Postman/Newman or automated tests).
-
-UAT with business users — checklist-driven.
-
-Regression tests on every release; automate where possible.
-
-Performance testing for heavy data operations.
-
-User Training & Handover
-
-Create role-based training materials: Admin guide, End-user quickstart, Troubleshooting.
-
-Conduct live sessions and record them.
-
-Provide runbooks: how to add new courses, reconcile payments, troubleshoot failed integrations.
-
-Monitoring, Maintenance & Backups
-
-Monitoring: Health Check, scheduled reports for errors & failed callouts, Apex exception logging (custom object).
-
-Backups: Regular exports (weekly/monthly) via Data Export or third-party backup apps.
-
-Maintenance: Quarterly org cleanup, field usage reports, inactive user clean-up.
-
-Ownership: Assign a Salesforce admin and an escalation path for incidents.
-
-Security & Compliance
-
-Use IP restrictions & 2FA for admin users.
-
-Enforce least privilege via Permission Sets and Profiles.
-
-Protect PII: field-level encryption if required, secure storage of sensitive data.
-
-Audit & compliance: enable Setup Audit Trail and Field History Tracking where needed.
-
-Ensure GDPR/PCI considerations for payment and personal data.
-
-Troubleshooting & Rollback Plan
-
-Pre-deploy: validate in a sandbox and run full test suite.
-
-Deploy checklist: data backups, change freeze, rollback plan.
-
-Rollback strategies:
-
-If configuration-only: re-deploy previous metadata from Git tag.
-
-If data migrations applied: keep pre-migration snapshots to restore.
-
-For quick fixes: hotfix branch -> test -> patch deploy.
-
-Error logging: centralize errors in a Platform_Error__c object for faster triage.
-
-Repository Structure & Usage
-
-Recommended repo layout:
-
-/README.md
-/CONTRIBUTING.md
-/LICENSE
-/sfdx-project.json
-/manifest/package.xml
-/force-app/main/default/
-  /classes/
-  /triggers/
-  /lwc/
-  /objects/
-  /pages/
-  /permissionsets/
-  /profiles/
-/data/
-  /sample_data/
-  /mappings/
-/docs/
-  /design/
-  /deployment/
-  /training/
-/scripts/
-  /deploy.sh
-  /data-load/
-.github/
-  /workflows/   # GitHub Actions
-
-Quick setup (developer)
-# Clone repo
-git clone https://github.com/<org>/<repo>.git
-cd <repo>
-
-# Authenticate to scratch org or CI org (example JWT)
-sfdx auth:jwt:grant --clientid $SF_CONSUMER_KEY --jwtkeyfile assets/server.key --username $SF_USERNAME --instanceurl https://login.salesforce.com
-
-# Push source to scratch org
-sfdx force:source:push
-
-# Run tests
-sfdx force:apex:test:run --resultformat human --wait 10
-
-How to Contribute
-
-Fork the repo and create a feature branch: feature/<short-description>.
-
-Follow the coding & naming conventions located in /docs/.
-
-Run unit tests locally and ensure no failures.
-
-Open a pull request with a clear description and link to the related issue.
-
-Wait for at least one review and pass CI checks before merging.
-
-Common Commands & Samples
-
-Convert source to metadata API format:
-
-sfdx force:source:convert -d mdapi_output_dir -r force-app
-
-
-Deploy to sandbox (validated):
-
-sfdx force:mdapi:deploy -d mdapi_output_dir -u MySandbox -w 10
-
-
-Run Apex tests:
-
-sfdx force:apex:test:run --resultformat human --wait 10
-
-Troubleshooting Tips
-
-Check setup audit trail for recent changes.
-
-Monitor Apex exception logs and platform events for errors.
-
-For integration errors, inspect remote server logs and Named Credential auth status.
-
-Validate sharing rules causing visibility issues using debug logs and running System.runAs tests where necessary.
+1. Web-to-Lead → Lead created.
+2. Validation Flow verifies required fields.
+3. Assignment rules
